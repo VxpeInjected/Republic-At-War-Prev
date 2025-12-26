@@ -8,7 +8,18 @@
 /* Utility: safe open in new tab */
 function openInNewTab(url) {
   if (!url) return;
-  window.open(url, '_blank', 'noopener,noreferrer');
+  try {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  } catch (e) {
+    // fallback
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // overlay control
   const overlay = document.getElementById('overlay');
   const overlayText = document.getElementById('overlayText');
-  const overlayBg = overlay ? overlay.querySelector('.overlay-bg') : null;
 
   function showOverlay(message = 'Engaging hyperdrive…') {
     if (!overlay) return;
@@ -69,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // allow clicking overlay to cancel (optional)
   if (overlay) {
     overlay.addEventListener('click', (e) => {
-      // only hide if click outside the content
       if (e.target === overlay) hideOverlay();
     });
   }
