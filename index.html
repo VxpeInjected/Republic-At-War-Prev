@@ -41,14 +41,14 @@
         <a class="nav-link" href="#features">Features</a>
         <a class="nav-link" href="#roadmap">Roadmap</a>
         <a class="nav-link" href="#news">News</a>
-        <button class="nav-link" id="docs-btn" data-modal="docs" aria-haspopup="dialog">Documentation</button>
+        <button class="nav-link" id="docs-btn" data-modal="modal-docs" aria-haspopup="dialog">Documentation</button>
         <a class="cta primary" id="play-btn" data-external data-href="https://www.roblox.com/games/PLACEHOLDER" role="button">Play Now</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <!-- Hero: new layout with large centered emblem and split content -->
+    <!-- Hero: centered content (emblem removed per request) -->
     <section class="hero" id="home" aria-label="Hero">
       <div class="container hero-inner">
         <div class="hero-left">
@@ -58,8 +58,8 @@
           <div class="hero-ctas">
             <a class="btn primary large" data-external data-href="https://www.roblox.com/games/PLACEHOLDER">Play on Roblox</a>
             <a class="btn ghost large" data-external data-href="https://discord.gg/PLACEHOLDER">Join Discord</a>
-            <button class="btn subtle large" id="watch-coming-soon" data-modal="coming-soon">Trailer (Coming Soon)</button>
-            <button class="btn doc large" id="docs-open" data-modal="docs">Documentation</button>
+            <button class="btn subtle large" id="watch-coming-soon" data-modal="modal-coming-soon">Trailer (Coming Soon)</button>
+            <button class="btn doc large" id="docs-open" data-modal="modal-docs">Documentation</button>
           </div>
 
           <ul class="badges">
@@ -69,50 +69,7 @@
           </ul>
         </div>
 
-        <div class="hero-right">
-          <!-- Emblem card (replaces ship SVG with a cleaner, Star Wars-y emblem) -->
-          <div class="emblem-card" aria-hidden="true" tabindex="0" aria-label="Republic At War emblem">
-            <div class="emblem-inner">
-              <!-- stylized emblem: circular ring + starburst -->
-              <svg class="emblem-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <defs>
-                  <radialGradient id="emG" cx="50%" cy="35%">
-                    <stop offset="0%" stop-color="#aef0ff"/>
-                    <stop offset="60%" stop-color="#4fbfff"/>
-                    <stop offset="100%" stop-color="#1b6fb4"/>
-                  </radialGradient>
-                  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
-                    <feMerge>
-                      <feMergeNode in="coloredBlur"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                  </filter>
-                </defs>
-
-                <circle cx="100" cy="100" r="58" fill="url(#emG)" filter="url(#glow)" opacity="0.95"/>
-                <circle cx="100" cy="100" r="44" fill="#021b2a" opacity="0.18"/>
-                <g fill="#dff7ff" opacity="0.96" transform="translate(100,100)">
-                  <!-- simple starburst -->
-                  <path d="M0 -36 L4 -10 L36 -4 L8 8 L20 36 L0 16 L-20 36 L-8 8 L-36 -4 L-4 -10 Z" transform="rotate(0)"/>
-                </g>
-
-                <!-- subtle ring accent -->
-                <path d="M100 20 a80 80 0 1 1 0 160 a80 80 0 1 1 0 -160" fill="none" stroke="rgba(174,240,255,0.06)" stroke-width="6" />
-              </svg>
-            </div>
-
-            <div class="emblem-info">
-              <h3>RaW Command Emblem</h3>
-              <p class="muted">An emblem of command. Tap Play to deploy into the alpha build.</p>
-              <div class="card-actions">
-                <button class="chip">Specs</button>
-                <button class="chip">Cosmetics</button>
-                <button class="chip" data-external data-href="https://www.roblox.com/games/PLACEHOLDER">Deploy</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- hero-right removed (emblem division) as requested -->
       </div>
 
       <div class="hero-bottom container">
@@ -211,22 +168,13 @@
     </div>
   </div>
 
-  <!-- Documentation popup modal -->
+  <!-- Documentation popup modal (white background, simple content) -->
   <div id="modal-docs" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
-    <div class="modal-inner" role="document">
+    <div class="modal-inner docs-inner" role="document">
       <button class="modal-back" aria-label="Back docs">&larr; Back</button>
       <div class="modal-body docs">
-        <h2>Documentation — Preview</h2>
-        <p class="lead">Docs are coming soon. This popup shows a quick preview of what will be included: setup guides, roleplay rules, ship specs, and server-team notes.</p>
-        <ul class="doc-list">
-          <li>Quick start: How to join alpha</li>
-          <li>Roleplay rules & etiquette</li>
-          <li>Ship classes & specs</li>
-          <li>Server admin notes & API</li>
-        </ul>
-        <div class="doc-actions">
-          <button class="btn ghost" id="docs-close">Close</button>
-        </div>
+        <h2>Documentation</h2>
+        <p style="margin-top:8px;font-size:18px">Coming soon</p>
       </div>
     </div>
   </div>
