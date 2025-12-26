@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>[ALPHA] Republic At War (RaW) — Roblox Star Wars Roleplay</title>
+  <meta name="description" content="[ALPHA] Republic At War (RaW) — immersive Star Wars roleplay on Roblox. Join fleets, fight for the galaxy, and shape the story." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Ctext x='0' y='48' font-size='48'%3E%F0%9F%8C%8C%3C/text%3E%3C/svg%3E">
+  <meta name="theme-color" content="#05060b">
+</head>
+<body>
+  <!-- Starfield -->
+  <div id="starfield" aria-hidden="true"></div>
+
+  <!-- overlay loading (in-page slick loader) -->
+  <div id="overlay" aria-hidden="true" role="status" aria-live="polite">
+    <div class="overlay-content" id="overlayContent">
+      <div class="hyperdrive">
+        <div class="hyper-core"></div>
+        <div class="hyper-flare"></div>
+      </div>
+      <div class="overlay-text" id="overlayText">Engaging hyperdrive…</div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand" role="img" aria-label="[ALPHA] Republic At War logo">
+        <div class="logo">
+          <span class="logo-main">[ALPHA] Republic At War</span>
+          <span class="logo-sub">RaW — Roblox Roleplay</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-link" href="#features">Features</a>
+        <a class="nav-link" href="#gallery">Gallery</a>
+        <a class="nav-link" href="#join">Join</a>
+        <a class="cta primary" id="play-btn" data-external data-href="https://www.roblox.com/games/PLACEHOLDER" role="button">Play Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-label="Hero">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <h1 class="hero-title"><span class="neon">[ALPHA]</span> Republic At War</h1>
+          <p class="hero-sub">RaW — An immersive Star Wars roleplay on Roblox. Command fleets, join factions, and create galactic history.</p>
+          <div class="hero-ctas">
+            <a class="btn primary large" data-external data-href="https://www.roblox.com/games/PLACEHOLDER">Play on Roblox</a>
+            <a class="btn ghost large" data-external data-href="https://discord.gg/PLACEHOLDER">Join Discord</a>
+            <button class="btn subtle large" id="watch-trailer" data-modal="trailer">Watch Trailer</button>
+          </div>
+          <ul class="badges">
+            <li>Faction PvP</li>
+            <li>Ship Customization</li>
+            <li>Deep Roleplay Systems</li>
+          </ul>
+        </div>
+
+        <div class="hero-right" aria-hidden="true">
+          <div class="ship-card" tabindex="0" aria-label="Ship preview card">
+            <div class="ship-top">
+              <svg class="ship-svg" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="g1" x1="0" x2="1">
+                    <stop offset="0" stop-color="#ff7a7a"/>
+                    <stop offset="1" stop-color="#7adfff"/>
+                  </linearGradient>
+                </defs>
+                <path d="M10 70 Q70 10 120 70 T190 70 L160 90 L40 90 Z" fill="url(#g1)" opacity="0.95" />
+              </svg>
+            </div>
+            <div class="ship-info">
+              <h3>RX-12 Interceptor</h3>
+              <p class="muted">Swift interceptor favored by Republic wing squads.</p>
+              <div class="card-actions">
+                <button class="chip">Specs</button>
+                <button class="chip">Customize</button>
+                <button class="chip" data-external data-href="https://www.roblox.com/games/PLACEHOLDER">Deploy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="chevrons" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </div>
+    </section>
+
+    <section class="features container" id="features" aria-label="Features">
+      <h2 class="section-title">Features</h2>
+      <div class="grid features-grid">
+        <article class="feature-card">
+          <div class="fc-icon">⚔️</div>
+          <h3>Faction Wars</h3>
+          <p>Join the Republic, Separatists, or independent factions. Fight for star systems and influence.</p>
+        </article>
+        <article class="feature-card">
+          <div class="fc-icon">🛠️</div>
+          <h3>Ship Customization</h3>
+          <p>Upgrade hulls, swap weapons, tune engines & cosmetics to dominate skirmishes.</p>
+        </article>
+        <article class="feature-card">
+          <div class="fc-icon">🎭</div>
+          <h3>Roleplay Systems</h3>
+          <p>Player-driven politics, ranks, missions, and story arcs crafted by the community.</p>
+        </article>
+        <article class="feature-card">
+          <div class="fc-icon">🌌</div>
+          <h3>Open Galaxy</h3>
+          <p>Explore planets, stations, asteroid fields, and hidden relics with emergent encounters.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="gallery container" id="gallery" aria-label="Gallery">
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery-grid">
+        <figure class="shot">
+          <div class="shot-img" style="background-image: linear-gradient(120deg,#112,#223);"></div>
+          <figcaption>Capital Ship Battle</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="shot-img" style="background-image: linear-gradient(120deg,#221122,#332233);"></div>
+          <figcaption>Hangar & Customization</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="shot-img" style="background-image: linear-gradient(120deg,#123,#345);"></div>
+          <figcaption>Planetside Roleplay</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="shot-img" style="background-image: linear-gradient(120deg,#021,#047);"></div>
+          <figcaption>Fleet Formation</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="join container" id="join" aria-label="Join">
+      <h2 class="section-title">Join the Galaxy</h2>
+      <p class="lead">Ready to jump into hyperspace? Join RaW and be part of ongoing storylines, events, and fleet battles.</p>
+      <div class="join-actions">
+        <a class="btn primary large" data-external data-href="https://www.roblox.com/games/PLACEHOLDER">Play on Roblox</a>
+        <a class="btn ghost large" data-external data-href="https://discord.gg/PLACEHOLDER">Join Discord</a>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>What platform is this on?</summary>
+          <p>Republic At War runs on Roblox. Launch using Play.</p>
+        </details>
+        <details>
+          <summary>How can I help with story or events?</summary>
+          <p>Join the Discord and check #roleplay and #events — community writers and organizers post campaigns there.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Republic At War — Built by the community</div>
+      <div class="socials">
+        <a class="social" aria-label="Discord" data-external data-href="https://discord.gg/PLACEHOLDER">Discord</a>
+        <a class="social" aria-label="Roblox" data-external data-href="https://www.roblox.com/games/PLACEHOLDER">Roblox</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Trailer modal -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-inner" role="document">
+      <button class="modal-close" aria-label="Close trailer">&times;</button>
+      <div class="modal-body">
+        <div class="video-wrap" id="videoWrap">
+          <!-- Replace src with your trailer link (YouTube embed suggested) -->
+          <iframe id="trailerFrame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Republic At War Trailer"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
