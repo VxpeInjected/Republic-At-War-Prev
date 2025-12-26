@@ -1,4 +1,4 @@
-/* Republic At War preview site - revised layout & emblem
+/* Republic At War preview site - emblem removed, docs modal simplified
    Color scheme: dark blue / light blue
    No CSS custom properties starting with double dash are used.
 */
@@ -28,14 +28,13 @@ body{
 .cta.primary{background:linear-gradient(90deg,#58c7ff,#2a9cff);color:#021928;padding:10px 18px;border-radius:12px;font-weight:800;text-decoration:none;box-shadow:0 12px 38px rgba(42,156,255,0.12);transition:transform .14s}
 .cta.primary:hover{transform:translateY(-4px) scale(1.02)}
 
-/* hero (new layout) */
+/* hero (single-column now) */
 .hero{padding:140px 0 120px;position:relative;overflow:visible}
-.hero-inner{display:grid;grid-template-columns:1fr 480px;gap:36px;align-items:center}
-.hero-left{padding-right:12px}
-.hero-right{display:flex;align-items:center;justify-content:center}
+.hero-inner{display:block;gap:36px;align-items:center;max-width:940px;margin:0 auto}
+.hero-left{padding-right:0;text-align:left}
 .hero-title{font-size:52px;margin:0;line-height:1}
 .neon{background:linear-gradient(90deg,#58c7ff,#8fd7ff);-webkit-background-clip:text;background-clip:text;color:transparent;font-family:Orbitron,Inter}
-.hero-sub{color:#a8cfe6;margin-top:12px;font-size:18px;max-width:680px}
+.hero-sub{color:#a8cfe6;margin-top:12px;font-size:18px;max-width:720px}
 .hero-ctas{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
 
 /* buttons with hover animations */
@@ -54,18 +53,6 @@ body{
 /* badges */
 .badges{display:flex;gap:12px;margin-top:18px;list-style:none;padding:0}
 .badges li{background:rgba(255,255,255,0.02);padding:8px 12px;border-radius:999px;font-size:13px;color:#9fcde8}
-
-/* emblem card (new, replaces ship-card) */
-.emblem-card{width:420px;background:linear-gradient(180deg,rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:18px;box-shadow:0 18px 60px rgba(2,6,23,0.6);transition:transform .26s,box-shadow .26s;transform-origin:center;border:1px solid rgba(255,255,255,0.03)}
-.emblem-card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 36px 120px rgba(10,20,40,0.6)}
-.emblem-inner{display:flex;align-items:center;gap:18px}
-.emblem-svg{width:120px;height:120px;flex:0 0 120px}
-.emblem-info{flex:1}
-.emblem-info h3{margin:0}
-.muted{color:#93b6c9;font-size:13px;margin-top:6px}
-.card-actions{display:flex;gap:8px;margin-top:12px}
-.chip{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:10px;color:#9fcde8;cursor:pointer;transition:all .14s}
-.chip:hover{transform:translateY(-4px);color:#fff;border-color:rgba(90,190,255,0.22)}
 
 /* features */
 .section-title{font-size:20px;font-weight:700;margin-bottom:18px;color:#fff}
@@ -91,7 +78,7 @@ body{
 .site-footer{padding:26px 0;color:#9fbfcf;margin-top:40px}
 .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:12px}
 
-/* modal */
+/* modal - shared */
 .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:140;visibility:hidden;opacity:0;transition:opacity .18s,visibility .18s}
 .modal[aria-hidden="false"]{visibility:visible;opacity:1}
 .modal-inner{width:min(760px,95%);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:12px;box-shadow:0 20px 80px rgba(0,0,0,0.6);position:relative}
@@ -99,8 +86,13 @@ body{
 .modal-body{padding:30px 12px;text-align:center}
 .coming-soon h2{font-size:26px;margin-bottom:8px}
 .coming-soon p{color:#9fcde8;margin-bottom:18px}
-.doc-list{text-align:left;display:inline-block;margin:12px 0;padding-left:18px;color:#bfe9ff}
-.doc-actions{margin-top:12px}
+
+/* docs modal override (white background, minimal) */
+.docs-inner{background:#ffffff;padding:26px;color:#0b1320}
+.docs-inner .modal-back{color:#0b1320}
+.docs .modal-body{padding:18px}
+.docs h2{color:#0b1320;margin:0;font-size:22px}
+.docs p{color:#243142;margin-top:10px;font-size:18px}
 
 /* space backdrop: stars, nebula, subtle planet and warp lines */
 #space-backdrop{
@@ -146,7 +138,7 @@ body{
   animation: hyper-streaks 0.6s linear infinite;
 }
 
-/* hyperdrive visual: the overlay core plus background movement to simulate FTL */
+/* hyperdrive visual */
 @keyframes hyper-streaks{
   0%{background-position:0 0, 0 0}
   100%{background-position:0 -1400px, 0 -1400px}
@@ -162,11 +154,10 @@ body{
 
 /* responsive */
 @media (max-width:1100px){
-  .hero-inner{grid-template-columns:1fr 380px;gap:24px}
+  .hero-inner{padding:0 12px}
 }
 @media (max-width:880px){
-  .hero-inner{grid-template-columns:1fr;gap:22px}
-  .emblem-card{width:100%}
+  .hero-inner{padding:0 10px}
   .container{padding:0 18px}
 }
 @media (max-width:560px){
