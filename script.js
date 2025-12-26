@@ -1,9 +1,10 @@
-// Interactivity for Republic At War (RaW) preview site
+// Interactivity for Republic At War (RaW) preview site (revised layout & docs popup)
 // - smooth scrolling for internal anchors
 // - in-page hyperdrive overlay for external links/buttons marked with [data-external]
-// - modal "coming soon" screen with back button
+// - documentation popup and coming-soon modal handling
 // - year auto-fill
 // - external links open in a new tab (noopener)
+// - warp effect toggles the background while overlay is active
 
 /* Utility: safe open in new tab */
 function openInNewTab(url) {
@@ -39,20 +40,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // overlay control
+  // overlay control & warp background
   const overlay = document.getElementById('overlay');
   const overlayText = document.getElementById('overlayText');
+  const backdrop = document.getElementById('space-backdrop');
 
   function showOverlay(message = 'Engaging hyperdrive…') {
     if (!overlay) return;
     overlay.setAttribute('aria-hidden', 'false');
     overlay.classList.add('hyperdrive-active');
+    if (backdrop) backdrop.classList.add('warp');
     if (overlayText) overlayText.textContent = message;
   }
   function hideOverlay() {
     if (!overlay) return;
     overlay.setAttribute('aria-hidden', 'true');
     overlay.classList.remove('hyperdrive-active');
+    if (backdrop) backdrop.classList.remove('warp');
   }
 
   // click handlers for any element with data-external and data-href
@@ -66,9 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
       showOverlay(label ? `${label} — Launching…` : 'Engaging hyperdrive…');
 
       // quick hyperdrive effect, then open in new tab
-      const wait = 900; // ms; short but noticeable
+      const wait = 900; // ms
       setTimeout(() => {
-        // open in new tab (per request)
         openInNewTab(href);
         // keep overlay for a short extra moment, then hide
         setTimeout(hideOverlay, 400);
@@ -83,37 +86,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Coming soon modal handling
-  const modal = document.getElementById('modal');
-  const trailerBtn = document.getElementById('watch-coming-soon');
-  const modalClose = document.getElementById('modal-close');
-  const modalBack = modal ? modal.querySelector('.modal-back') : null;
-
-  function openModal() {
+  // Modal handling (coming soon & docs)
+  function setupModal(buttonSelectorOrId, modalId) {
+    const btn = (typeof buttonSelectorOrId === 'string') ? document.getElementById(buttonSelectorOrId) || document.querySelector(buttonSelectorOrId) : null;
+    const modal = document.getElementById(modalId);
     if (!modal) return;
-    modal.setAttribute('aria-hidden', 'false');
-  }
-  function closeModal() {
-    if (!modal) return;
-    modal.setAttribute('aria-hidden', 'true');
-  }
 
-  if (trailerBtn) {
-    trailerBtn.addEventListener('click', () => {
-      openModal();
+    const closeBtns = modal.querySelectorAll('.modal-back, .btn.ghost, .btn.primary, #modal-close, #docs-close');
+    const openFn = () => modal.setAttribute('aria-hidden', 'false');
+    const closeFn = () => modal.setAttribute('aria-hidden', 'true');
+
+    // open triggers: elements with data-modal pointing to this modal id
+    document.querySelectorAll(`[data-modal="${modalId}"]`).forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openFn();
+      });
     });
-  }
-  if (modalClose) modalClose.addEventListener('click', closeModal);
-  if (modalBack) modalBack.addEventListener('click', closeModal);
-  if (modal) modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
 
-  // keyboard: Esc to close modal or overlay
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeModal();
-      hideOverlay();
-    }
-  });
+    // also support explicit button ids
+    if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); openFn(); });
+
+    // close triggers
+    closeBtns.forEach(cb => cb.addEventListener('click', () => closeFn()));
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeFn(); });
+
+    // Esc closes
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeFn(); });
+  }
+
+  // Wire modals:
+  // Coming soon: id "modal-coming-soon"
+  setupModal('watch-coming-soon', 'modal-coming-soon');
+  // Docs modal: a couple of potential triggers (#docs-btn and #docs-open)
+  setupModal('docs-btn', 'modal-docs');
+  setupModal('docs-open', 'modal-docs');
+
+  // Accessibility: trap focus could be added here if desired for the modals
+
 });
