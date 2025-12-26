@@ -1,4 +1,4 @@
-// Interactivity for Republic At War (RaW) preview site (revised layout & docs popup)
+// Interactivity for Republic At War (RaW) preview site (emblem removed, docs popup)
 // - smooth scrolling for internal anchors
 // - in-page hyperdrive overlay for external links/buttons marked with [data-external]
 // - documentation popup and coming-soon modal handling
@@ -12,7 +12,6 @@ function openInNewTab(url) {
   try {
     window.open(url, '_blank', 'noopener,noreferrer');
   } catch (e) {
-    // fallback
     const a = document.createElement('a');
     a.href = url;
     a.target = '_blank';
@@ -66,14 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const href = el.getAttribute('data-href');
       const label = el.getAttribute('data-label') || '';
 
-      // show hyperdrive overlay with custom or default message
       showOverlay(label ? `${label} — Launching…` : 'Engaging hyperdrive…');
 
-      // quick hyperdrive effect, then open in new tab
       const wait = 900; // ms
       setTimeout(() => {
         openInNewTab(href);
-        // keep overlay for a short extra moment, then hide
         setTimeout(hideOverlay, 400);
       }, wait);
     });
@@ -87,41 +83,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Modal handling (coming soon & docs)
-  function setupModal(buttonSelectorOrId, modalId) {
-    const btn = (typeof buttonSelectorOrId === 'string') ? document.getElementById(buttonSelectorOrId) || document.querySelector(buttonSelectorOrId) : null;
+  function setupModal(triggerSelectorOrId, modalId) {
     const modal = document.getElementById(modalId);
     if (!modal) return;
 
-    const closeBtns = modal.querySelectorAll('.modal-back, .btn.ghost, .btn.primary, #modal-close, #docs-close');
+    const openEls = document.querySelectorAll(`[data-modal="${modalId}"]`);
+    const explicitBtn = document.getElementById(triggerSelectorOrId);
+    const closeBtns = modal.querySelectorAll('.modal-back, .btn');
+
     const openFn = () => modal.setAttribute('aria-hidden', 'false');
     const closeFn = () => modal.setAttribute('aria-hidden', 'true');
 
-    // open triggers: elements with data-modal pointing to this modal id
-    document.querySelectorAll(`[data-modal="${modalId}"]`).forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        openFn();
-      });
-    });
+    openEls.forEach(el => el.addEventListener('click', (e) => { e.preventDefault(); openFn(); }));
+    if (explicitBtn) explicitBtn.addEventListener('click', (e) => { e.preventDefault(); openFn(); });
 
-    // also support explicit button ids
-    if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); openFn(); });
-
-    // close triggers
-    closeBtns.forEach(cb => cb.addEventListener('click', () => closeFn()));
+    closeBtns.forEach(cb => cb.addEventListener('click', closeFn));
     modal.addEventListener('click', (e) => { if (e.target === modal) closeFn(); });
-
-    // Esc closes
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeFn(); });
   }
 
-  // Wire modals:
-  // Coming soon: id "modal-coming-soon"
   setupModal('watch-coming-soon', 'modal-coming-soon');
-  // Docs modal: a couple of potential triggers (#docs-btn and #docs-open)
   setupModal('docs-btn', 'modal-docs');
-  setupModal('docs-open', 'modal-docs');
-
-  // Accessibility: trap focus could be added here if desired for the modals
+  setupModal('docs-open', 'modal-docs'); // harmless if docs-open is present or not
 
 });
